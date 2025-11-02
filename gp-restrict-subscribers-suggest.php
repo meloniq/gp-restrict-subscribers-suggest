@@ -54,11 +54,16 @@ function gprss_pre_restrict_subscribers_suggest( $verdict, $args ) {
 
 	// Is the user a subscriber?
 	$user = $args['user'];
-	if ( in_array( 'subscriber', (array) $user->roles, true ) ) {
-		// Deny permission to suggest translations.
-		return false;
+	if ( ! in_array( 'subscriber', (array) $user->roles, true ) ) {
+		return $verdict;
 	}
 
-	return $verdict;
+	// Does the user have extra permission to add translations?
+	if ( GP::$permission->user_can( $user, 'approve', 'translation-set', $args['object_id'], $args['extra'] ) ) {
+		return $verdict;
+	}
+
+	// Deny permission to suggest translations.
+	return false;
 }
 add_filter( 'gp_pre_can_user', 'gprss_pre_restrict_subscribers_suggest', 10, 2 );
