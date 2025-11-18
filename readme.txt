@@ -21,6 +21,10 @@ they will be able to add translations to that locale, but not to others.
 Once you have installed GP Restrict Subscribers Suggest it is ready to use.
 
 
+== Screenshots ==
+1. Subscriber is not allowed to suggest translations.
+2. Subscriber is a validator for a locale.
+
 == Changelog ==
 
 = 1.0 =
